@@ -16,7 +16,7 @@ class ProjectSpec: QuickSpec {
 			let directoryURL = Bundle(for: type(of: self)).url(forResource: "DependencyTest", withExtension: nil)!
 			let buildDirectoryURL = directoryURL.appendingPathComponent(Constants.binariesFolderPath)
 
-			func buildDependencyies(platforms: Set<Platform> = [], cacheBuilds: Bool = true, dependenciesToBuild: [String]? = nil) -> [(String, Bool)] {
+			func buildDependencies(platforms: Set<Platform> = [], cacheBuilds: Bool = true, dependenciesToBuild: [String]? = nil) -> [(String, Bool)] {
 				let project = Project(directoryURL: directoryURL)
 				let result = project.buildCheckedOutDependenciesWithOptions(BuildOptions(configuration: "Debug", platforms: platforms, cacheBuilds: cacheBuilds), dependenciesToBuild: dependenciesToBuild)
 					.ignoreTaskData()
@@ -35,11 +35,11 @@ class ProjectSpec: QuickSpec {
 			}
 
 			func buildDependencyTest(platforms: Set<Platform> = [], cacheBuilds: Bool = true, dependenciesToBuild: [String]? = nil) -> [String] {
-				return buildDependencyies(platforms: platforms, cacheBuilds: cacheBuilds, dependenciesToBuild: dependenciesToBuild).map { $0.0 }
+				return buildDependencies(platforms: platforms, cacheBuilds: cacheBuilds, dependenciesToBuild: dependenciesToBuild).map { $0.0 }
 			}
 			
 			func buildDependencyTestWithIgnored(platforms: Set<Platform> = [], cacheBuilds: Bool = true, dependenciesToBuild: [String]? = nil) -> [(String, Bool)] {
-				return buildDependencyies(platforms: platforms, cacheBuilds: cacheBuilds, dependenciesToBuild: dependenciesToBuild)
+				return buildDependencies(platforms: platforms, cacheBuilds: cacheBuilds, dependenciesToBuild: dependenciesToBuild)
 			}
 			
 			beforeEach {
